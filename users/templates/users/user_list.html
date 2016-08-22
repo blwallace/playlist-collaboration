@@ -3,17 +3,17 @@
 
 {% block content %}
 
-
-      <!-- Displays all songs -->
+      <!-- Displays all users -->
         <div class="col-md-4"></div>
         <div class="col-md-4">
+            <h1>Users</h1>
             <p><a href="{% url 'playlist_list' %}">View Playlists</a></p>
             <p><a href="{% url 'song_add' %}">Add Song</a></p>
-            <p>All Songs</p>
-            {% for song in songs %}
+            <p>All Users</p>
+            {% for user in users%}
             <p>
-                <a href="{{ song.get_absolute_url }}">
-                  {{ song.name }}
+                <a href="/users/{{ user.pk }}/">
+                  {{ user.username }}
                 </a>
             </p>
             {% endfor %}

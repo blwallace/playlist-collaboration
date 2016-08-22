@@ -1,1 +1,17 @@
-{{ user }}
+{% extends 'playlists/navbar.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+
+      <!-- Displays user detail -->
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h1>User Details</h1>
+            <p>{{ user }}</p>
+
+        </div>
+        <div class="col-md-4"></div>
+
+
+{% endblock %}

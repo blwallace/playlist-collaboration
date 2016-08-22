@@ -17,7 +17,7 @@ def user_add(request):
 
 def user_list(request):
     users = User.objects.all()
-    return render(request, 'users/list.html', {'users': users})
+    return render(request, 'users/user_list.html', {'users': users})
 
 
 def user_detail(request, pk):
