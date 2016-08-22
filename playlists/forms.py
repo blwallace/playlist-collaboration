@@ -4,7 +4,7 @@ from .models import Song, Playlist
 
 class SongForm(forms.ModelForm):
 
-    playlist = forms.ModelChoiceField(queryset=Playlist.objects.all())
+    playlist = forms.ModelChoiceField(queryset=Playlist.objects.all(), required=True)
 
     class Meta:
         model = Song
