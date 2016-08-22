@@ -21,9 +21,9 @@ class Song(models.Model):
     def get_absolute_url(self):
         return "/song/%i/" % self.id
 
-
     def __str__(self):
         return self.name
+
 
 class Playlist(models.Model):
     # user = models.ForeignKey('auth.User')
