@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import Permission, User
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from django.shortcuts import get_object_or_404
-from .forms import UserCreateForm
+from .forms import UserCreateForm, UserLoginForm
 
 def user_add(request):
     if request.method == "POST":
@@ -23,3 +24,22 @@ def user_list(request):
 def user_detail(request, pk):
     user = get_object_or_404(User, pk=pk)
     return render(request, 'users/user_detail.html', {'user': user})
+
+
+def user_authenticate(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        # If user is authenticated and active, login and navigate to success page
+        if user is not None and user.is_active:
+            login(request, user)
+            return redirect('user_detail', pk=user.pk)
+        else:
+            form = UserLoginForm
+            form.message = "Login Error"
+            return render(request, 'users/form.html', {'form': form})
+
+    form = UserLoginForm
+    return render(request, 'users/form.html', {'form': form})
+
