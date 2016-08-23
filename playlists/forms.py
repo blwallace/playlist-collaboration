@@ -1,6 +1,6 @@
 from django import forms
-
 from .models import Song, Playlist
+
 
 class SongForm(forms.ModelForm):
 
@@ -9,6 +9,7 @@ class SongForm(forms.ModelForm):
     class Meta:
         model = Song
         fields = ('uri','name','playlist')
+
 
 class PlaylistForm(forms.ModelForm):
 

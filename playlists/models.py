@@ -4,6 +4,7 @@ from django.utils import timezone
 
 
 class Song(models.Model):
+    """Fields: id, uri, playlist, name, created_date, published_date"""
     id = models.AutoField(primary_key=True)
     # user = models.ForeignKey('auth.User')
     uri = models.CharField(max_length=100)
@@ -19,6 +20,7 @@ class Song(models.Model):
         self.save()
 
     def get_absolute_url(self):
+        """Used in templates to get link"""
         return "/song/%i/" % self.id
 
     def __str__(self):

@@ -5,12 +5,15 @@ from django.shortcuts import redirect
 from django.utils import timezone
 
 
-
 def song_list(request):
+    """ Displays all songs for all users"""
     songs = Song.objects.all()
     return render(request, 'playlists/song_list.html', {'songs': songs})
 
+
 def song_add(request):
+    """ Adds a song.
+        User Inputs: name, uri, playlist, created/published date"""
     if request.method == "POST":
         form = SongForm(request.POST)
         if form.is_valid():
@@ -26,19 +29,28 @@ def song_add(request):
         form = SongForm()
         return render(request, 'playlists/form.html', {'songs': songs, 'form': form})
 
+
 def song_detail(request, pk):
+    """Displays data for a song"""
     song = get_object_or_404(Song, pk=pk)
     return render(request, 'playlists/song_detail.html', {'song': song})
 
+
 def playlist_list(request):
+    """ Displays all playlists for all users"""
     playlists = Playlist.objects.all()
     return render(request, 'playlists/playlist_list.html', {'playlists': playlists})
 
+
 def playlist_detail(request, pk):
+    """ Displays the details for a playlist"""
     playlist = get_object_or_404(Playlist, pk=pk)
     return render(request, 'playlists/playlist_detail.html', {'playlist': playlist})
 
+
 def playlist_add(request):
+    """Adds a playlist
+        inputs: Name, created, published dates """
     if request.method == "POST":
         form = PlaylistForm(request.POST)
         if form.is_valid():
@@ -47,7 +59,6 @@ def playlist_add(request):
             playlist.published_date = timezone.now()
             playlist.save()
             return redirect('playlist_detail', pk=playlist.pk)
-
     else:
         playlists = Playlist.objects.all()
         form = PlaylistForm()
