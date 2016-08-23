@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import get_object_or_404
 from .forms import UserCreateForm, UserLoginForm
 
@@ -39,7 +39,13 @@ def user_authenticate(request):
             form = UserLoginForm
             form.message = "Login Error"
             return render(request, 'users/form.html', {'form': form})
+    # Else return the login page
+    form = UserLoginForm
+    return render(request, 'users/form.html', {'form': form})
 
+
+def user_logout(request):
+    logout(request)
     form = UserLoginForm
     return render(request, 'users/form.html', {'form': form})
 
